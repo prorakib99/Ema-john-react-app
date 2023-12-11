@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Product from "../Product/Product";
 import { useEffect } from "react";
+import CartItem from "../CartItem/CartItem";
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
@@ -46,6 +47,7 @@ const Shop = () => {
         
     return (
         <div className="container mx-auto px-8">
+            <CartItem></CartItem>
             <div className="grid grid-cols-[4fr_1fr]">
 
                 <div className="grid lg:grid-cols-3 gap-12 my-12">
@@ -70,6 +72,7 @@ const Shop = () => {
                     </div>
                 </div>
             </div>
+            
         </div>
     );
 };
