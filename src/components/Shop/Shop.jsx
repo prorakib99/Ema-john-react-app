@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Product from "../Product/Product";
 import { useEffect } from "react";
-import CartItem from "../CartItem/CartItem";
+import DeleteIcon from '../../images/DeleteIcon.svg'
+import ArrowIcon from '../../images/Arrow.svg'
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
@@ -10,7 +11,6 @@ const Shop = () => {
     const [shipping, setShipping] = useState(0)
     const [tax, setTax] = useState(0)
     const [grandTotal, setGrandTotal] = useState(0)
-
 
     useEffect(() => {
         fetch('https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json')
@@ -47,15 +47,12 @@ const Shop = () => {
         
     return (
         <div className="container mx-auto px-8">
-            <CartItem></CartItem>
             <div className="grid grid-cols-[4fr_1fr]">
-
                 <div className="grid lg:grid-cols-3 gap-12 my-12">
                     {
                         products.map(product => <Product addToCart={addToCart} key={product.id} product={product}></Product>)
                     }
                 </div>
-
 
                 <div className="bg-[#FF99004D] rounded pt-[8%] py-7 px-4 h-full fixed right-0 top-0 z-0">
                     <h4 className="text-gray-800 text-[25px] text-center font-normal font-['Lato']">Order Summary</h4>
@@ -67,8 +64,8 @@ const Shop = () => {
                         <p className="text-neutral-900 text-[21px] mb-2 font-normal font-['Lato'] tracking-tight">Grand Total: ${grandTotal}</p>
                     </div>
                     <div className="text-center flex flex-col">
-                        <button onClick={restCart} className="w-[232px] mb-4 h-12 bg-red-500 rounded text-white text-[17px] font-normal font-['Lato'] tracking-tight">Clear Cart</button>
-                        <button className="w-[232px] h-12 bg-amber-500 rounded text-white text-[17px] font-normal font-['Lato'] tracking-tight">Review Order</button>
+                        <button onClick={restCart} className="w-[232px] mb-4 h-12 bg-red-500 rounded text-white text-[17px] font-normal font-['Lato'] tracking-tight flex items-center justify-center gap-3">Clear Cart <img src={DeleteIcon} alt="" /></button>
+                        <button className="w-[232px] h-12 bg-amber-500 rounded text-white text-[17px] font-normal font-['Lato'] tracking-tight flex items-center justify-center gap-3">Review Order <img src={ArrowIcon} alt="" /></button>
                     </div>
                 </div>
             </div>
