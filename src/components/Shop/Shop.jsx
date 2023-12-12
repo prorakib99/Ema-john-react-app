@@ -28,7 +28,7 @@ const Shop = () => {
                     }
                 </div>
 
-                <div className="bg-[#FF99004D] rounded pt-[8%] py-7 h-screen px-4 sticky right-0 top-0">
+                <div className="bg-[#FF99004D] rounded pt-[8%] py-7 h-screen px-4 fixed right-0 top-0">
                     <Cart removeCart={removeCart} cart={cart}></Cart>
                 </div>
             </div>

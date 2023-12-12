@@ -16,7 +16,7 @@ const Product = props => {
                     </p>
                 </div>
 
-                <button onClick={() => cartClick(props.product)} className="w-full h-12 mt-[13px] bg-orange-200 rounded-bl-lg rounded-br-lg border border-gray-400  text-neutral-900 text-[15px] font-normal font-['Lato'] tracking-tight hover:bg-orange-500 focus:bg-green-600 flex justify-center items-center gap-2">Add to Cart <img src={CartPlus} alt="" /></button>
+                <button onClick={() => cartClick(props.product)} className="w-full h-12 mt-[13px] bg-orange-200 rounded-bl-lg rounded-br-lg border border-gray-400  text-neutral-900 text-[15px] font-bold font-['Lato'] tracking-tight hover:bg-orange-500 focus:bg-green-600 flex justify-center items-center gap-2">Add to Cart <img src={CartPlus} alt="" /></button>
             </div>
         </div>
     );
