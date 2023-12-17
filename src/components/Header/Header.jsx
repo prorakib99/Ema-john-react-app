@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../../images/Logo.svg'
 import './Header.css'
 const Header = () => {
@@ -10,10 +11,10 @@ const Header = () => {
                     </div>
                     <nav>
                         <ul className='navigation flex gap-8'>
-                            <li><a className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' href="/order">Order</a></li>
-                            <li><a className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' href="/order-review">Order Review</a></li>
-                            <li><a className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' href="/inventory">Inventory</a></li>
-                            <li><a className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' href="/login">Login</a></li>
+                            <li><Link className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' to="/">Shop</Link></li>
+                            <li><Link className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' to="/order">Order Review</Link></li>
+                            <li><Link className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' to="/inventory">Inventory</Link></li>
+                            <li><Link className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' to="/login">Login</Link></li>
                         </ul>
                     </nav>
                 </div>
