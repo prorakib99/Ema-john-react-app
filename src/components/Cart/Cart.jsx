@@ -1,4 +1,4 @@
-import React from 'react';
+
 import DeleteIcon from '../../images/DeleteIcon.svg';
 import ArrowIcon from '../../images/Arrow.svg';
 const Cart = ({ cart, removeCart }) => {
