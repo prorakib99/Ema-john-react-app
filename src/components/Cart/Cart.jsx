@@ -1,7 +1,6 @@
 
 import DeleteIcon from '../../images/DeleteIcon.svg';
-import ArrowIcon from '../../images/Arrow.svg';
-const Cart = ({ cart, removeCart }) => {
+const Cart = ({ cart, removeCart, children }) => {
 
     let totalPrice = 0;
     let shipping = 0;
@@ -26,7 +25,7 @@ const Cart = ({ cart, removeCart }) => {
             </div>
             <div className="text-center flex flex-col">
                 <button onClick={removeCart} className="w-[232px] mb-4 h-12 bg-red-500 rounded text-white text-[17px] font-normal font-['Lato'] tracking-tight flex items-center justify-center gap-3">Clear Cart <img src={DeleteIcon} alt="" /></button>
-                <button className="w-[232px] h-12 bg-amber-500 rounded text-white text-[17px] font-normal font-['Lato'] tracking-tight flex items-center justify-center gap-3">Review Order <img src={ArrowIcon} alt="" /></button>
+               {children}
             </div>
         </div>
     );

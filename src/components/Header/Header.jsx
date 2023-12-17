@@ -7,7 +7,9 @@ const Header = () => {
             <div className="container mx-auto px-8">
                 <div className='h-20 flex justify-between items-center'>
                     <div className="h-[42.46px] relative">
-                        <img src={logo} alt="" />
+                        <Link to='/'>
+                            <img src={logo} alt="" />
+                        </Link>
                     </div>
                     <nav>
                         <ul className='navigation flex gap-8'>

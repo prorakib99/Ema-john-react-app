@@ -5,7 +5,7 @@ const CartItem = ({cart, deleteCart}) => {
     const removeCart = deleteCart;
     return (
         <>
-            <div className="w-[571px] h-[107px] rounded-lg border my-6 flex items-center justify-between border-gray-400">
+            <div className="h-[107px] rounded-lg border mb-6 flex items-center justify-between border-gray-400">
                 <div className="flex gap-2">
                     <img className="w-[91px] h-[91px] rounded-md m-[8px]" src={img} />
                     <div className='my-3'>

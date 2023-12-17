@@ -1,8 +1,7 @@
-import CartPlus from '../../images/cart-plus.svg'
+import CartPlus from '../../images/cart-plus.svg';
 const Product = props => {
-    const {name, img, ratings, price, seller} = props.product;
+    const { name, img, ratings, price, seller } = props.product;
     const cartClick = props.addToCart;
-
     return (
         <div className="w-full h-[508px]">
             <div className="rounded-lg border border-gray-400">

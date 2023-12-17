@@ -2,7 +2,10 @@ import { useState } from "react";
 import Product from "../Product/Product";
 import { useEffect } from "react";
 import Cart from "../Cart/Cart";
+import ArrowIcon from '../../images/Arrow.svg';
 import { addToDb, deleteShoppingCart, getShoppingCart } from "../../utilities/fakedb";
+import { Link } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
@@ -29,7 +32,8 @@ const Shop = () => {
         setCart(addProducts);
     }, [products])
 
-
+    // Success Toast Add
+    const addSuccess = () => toast.success('Added Successful');
     const addToCart = product => {
         let newCart = [];
 
@@ -47,7 +51,7 @@ const Shop = () => {
         }
 
         setCart(newCart)
-
+        addSuccess()
         addToDb(product.id)
     }
 
@@ -57,6 +61,7 @@ const Shop = () => {
     }
     return (
         <div className="container mx-auto px-8">
+            <Toaster />
             <div className="grid grid-cols-[4fr_1fr]">
                 <div className="grid lg:grid-cols-3 gap-12 my-12">
                     {
@@ -65,7 +70,11 @@ const Shop = () => {
                 </div>
 
                 <div className="bg-[#FF99004D] rounded pt-[8%] py-7 h-screen px-4 fixed right-0 top-0">
-                    <Cart removeCart={removeCart} cart={cart}></Cart>
+                    <Cart removeCart={removeCart} cart={cart}>
+                        <Link to='/order'>
+                            <button className="w-[232px] h-12 bg-amber-500 rounded text-white text-[17px] font-normal font-['Lato'] tracking-tight flex items-center justify-center gap-3">Review Order <img src={ArrowIcon} alt="" /></button>
+                        </Link>
+                    </Cart>
                 </div>
             </div>
             
