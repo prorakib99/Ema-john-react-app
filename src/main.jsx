@@ -12,11 +12,14 @@ import Inventory from './components/Inventory/Inventory.jsx';
 import Login from './components/Login/Login.jsx';
 import cartProductsLoader from './ProductsLoader/ProductsLoader.js';
 import Checkout from './components/Checkout/Checkout.jsx';
+import NotFound from './components/NotFound/NotFound.jsx';
+import Register from './components/Register/Register.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home></Home>,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: '/',
@@ -38,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login></Login>
+      },
+      {
+        path: 'register',
+        element: <Register></Register>
       }
     ]
   }

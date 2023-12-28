@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import logo from '../../images/Logo.svg'
-import './Header.css'
 const Header = () => {
     return (
         <div className="z-10 w-full h-20 bg-gray-800 relative flex-col justify-start items-start inline-flex">
@@ -15,7 +14,7 @@ const Header = () => {
                         <ul className='navigation flex gap-8'>
                             <li><Link className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' to="/">Shop</Link></li>
                             <li><Link className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' to="/order">Order Review</Link></li>
-                            <li><Link className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' to="/inventory">Inventory</Link></li>
+                            <li><Link className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' to="/inventory">Manage Inventory</Link></li>
                             <li><Link className='text-white text-[17px] font-normal font-["Lato"] tracking-tight' to="/login">Login</Link></li>
                         </ul>
                     </nav>
