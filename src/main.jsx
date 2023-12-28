@@ -14,6 +14,7 @@ import cartProductsLoader from './ProductsLoader/ProductsLoader.js';
 import Checkout from './components/Checkout/Checkout.jsx';
 import NotFound from './components/NotFound/NotFound.jsx';
 import Register from './components/Register/Register.jsx';
+import Animation from './components/Animation/Animation.jsx';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: 'register',
         element: <Register></Register>
+      },
+      {
+        path: 'animation',
+        element: <Animation></Animation>
       }
     ]
   }

@@ -33,7 +33,7 @@ const Login = () => {
                         <div className="w-[145px] h-[0px] border border-gray-400"></div>
                     </div>
                     <div>
-                        <button className="w-full h-[55px] rounded-[5px] border border-gray-400 text-slate-700 text-[17px] font-normal tracking-tight flex justify-center items-center gap-2">
+                        <button className="w-full h-[55px] rounded-[5px] border hover:bg-slate-200 border-gray-400 text-slate-700 text-[17px] duration-300 font-normal tracking-tight flex justify-center items-center gap-2">
                             <FcGoogle className="text-3xl" />
                             Continue with Google
                         </button>
