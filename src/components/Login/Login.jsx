@@ -1,12 +1,14 @@
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
-import { useContext } from "react";
+import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
     const { user, signInUser, popUpSignIn } = useContext(AuthContext);
-    
+    const [show, setShow] = useState(false)
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -29,17 +31,17 @@ const Login = () => {
         }
 
         signInUser(email, password)
-        .then(result => {
-            const user = result.user;
-            toast.success(<b>User Sign In Success! {user.email}</b>);
-            toast.dismiss(loadingPromise);
-            navigate(from, { replace: true })
-        })
-        .catch(error => {
-            console.log(error);
-            toast.error(<b>Something Wrong Sign In Failed</b>);
-            toast.dismiss(loadingPromise);
-        })
+            .then(result => {
+                const user = result.user;
+                toast.success(<b>User Sign In Success! {user.email}</b>);
+                toast.dismiss(loadingPromise);
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error(<b>Something Wrong Sign In Failed</b>);
+                toast.dismiss(loadingPromise);
+            })
 
     }
 
@@ -47,23 +49,23 @@ const Login = () => {
 
         const loadingPromise = toast.loading('Pending...');
         () => loadingPromise;
-        
+
         popUpSignIn()
-        .then(result => {
-            const user = result.user;
-            toast.success(<b>User Sign In Success! {user.email}</b>);
-            toast.dismiss(loadingPromise);
-            navigate(from, { replace: true })
-        })
-        .catch(error => {
-            console.log(error);
-            toast.error(<b>Something Wrong Sign In Failed</b>);
-            toast.dismiss(loadingPromise);
-        })
+            .then(result => {
+                const user = result.user;
+                toast.success(<b>User Sign In Success! {user.email}</b>);
+                toast.dismiss(loadingPromise);
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error(<b>Something Wrong Sign In Failed</b>);
+                toast.dismiss(loadingPromise);
+            })
     }
 
-    if(user){
-       return <Navigate to='/' replace={true}></Navigate>
+    if (user) {
+        return <Navigate to='/' replace={true}></Navigate>
     }
 
     return (
@@ -79,9 +81,13 @@ const Login = () => {
                             <input type="email" name="email" placeholder="Your Email..." className="rounded-[5px] h-[55px] text-lg px-4 mt-2 border w-full border-gray-400" />
                         </div>
 
-                        <div>
+                        <div className="relative">
                             <label htmlFor="password" className="text-slate-700 ml-3 text-[17px] block font-normal tracking-tight">Password</label>
-                            <input type="password" name="password" placeholder="Your Password..." className="rounded-[5px] h-[55px] text-lg px-4 mt-2 border w-full border-gray-400" />
+                            <input type={show ? 'text' : 'password'} name="password" placeholder="Your Password..." className="rounded-[5px] h-[55px] text-lg px-4 mt-2 border w-full border-gray-400" />
+
+                            <p onClick={() => setShow(!show)} className="cursor-pointer absolute right-4 bottom-4">
+                                { show ? <AiOutlineEyeInvisible className="text-2xl" /> : <AiOutlineEye className="text-2xl" /> }
+                            </p>
                         </div>
 
                         <div className="mt-5">

@@ -1,13 +1,17 @@
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
+import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
 
     const { user, createUser, popUpSignIn } = useContext(AuthContext)
+    const [show, setShow] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const navigate = useNavigate()
 
@@ -75,14 +79,22 @@ const Register = () => {
                             <input type="email" name="email" placeholder="Your Email..." className="rounded-[5px] h-[55px] text-lg px-4 mt-2 border w-full border-gray-400" />
                         </div>
 
-                        <div>
+                        <div className="relative">
                             <label htmlFor="password" className="text-slate-700 ml-3 text-[17px] block font-normal tracking-tight">Password</label>
-                            <input type="password" name="password" placeholder="Your Password..." className="rounded-[5px] h-[55px] text-lg px-4 mt-2 border w-full border-gray-400" />
+                            <input type={show ? 'text' : 'password'} name="password" placeholder="Your Password..." className="rounded-[5px] h-[55px] text-lg px-4 mt-2 border w-full border-gray-400" />
+
+                            <p onClick={() => setShow(!show)} className="cursor-pointer absolute right-4 bottom-4">
+                                { show ? <AiOutlineEyeInvisible className="text-2xl" /> : <AiOutlineEye className="text-2xl" /> }
+                            </p>
                         </div>
 
-                        <div>
+                        <div className="relative">
                             <label htmlFor="confirm" className="text-slate-700 ml-3 text-[17px] block font-normal tracking-tight">Confirm Password</label>
-                            <input type="password" name="confirm" placeholder="Your Confirm Password..." className="rounded-[5px] h-[55px] text-lg px-4 mt-2 border w-full border-gray-400" />
+                            <input type={showConfirm ? 'text' : 'password'} name="confirm" placeholder="Your Confirm Password..." className="rounded-[5px] h-[55px] text-lg px-4 mt-2 border w-full border-gray-400" />
+
+                            <p onClick={() => setShowConfirm(!showConfirm)} className="cursor-pointer absolute right-4 bottom-4">
+                                { showConfirm ? <AiOutlineEyeInvisible className="text-2xl" /> : <AiOutlineEye className="text-2xl" /> }
+                            </p>
                         </div>
 
                         <div className="mt-5">
