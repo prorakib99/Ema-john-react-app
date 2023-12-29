@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
             setLoading(false)
         });
 
-        return () => unSubscribe;
+        return () => unSubscribe();
     }, [])
     return (
         <AuthContext.Provider value={authInfo}>

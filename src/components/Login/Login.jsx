@@ -1,14 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
-    const { signInUser } = useContext(AuthContext)
+    const { signInUser } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = event => {
         event.preventDefault();
+
+        const loadingPromise = toast.loading('Pending...');
+        () => loadingPromise;
+
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
@@ -18,15 +27,18 @@ const Login = () => {
             return;
         }
 
-        const loginUser = signInUser(email, password)
-        toast.promise(
-            loginUser,
-            {
-                loading: 'Pending...',
-                success: <b>User Sign In Success!</b>,
-                error: <b>Something Wrong Sign In Failed</b>,
-            }
-        );
+        signInUser(email, password)
+        .then(result => {
+            const user = result.user;
+            toast.success(<b>User Sign In Success! {user.email}</b>);
+            toast.dismiss(loadingPromise);
+            navigate(from, { replace: true })
+        })
+        .catch(error => {
+            console.log(error);
+            toast.error(<b>Something Wrong Sign In Failed</b>);
+            toast.dismiss(loadingPromise);
+        })
 
     }
 

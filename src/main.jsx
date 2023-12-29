@@ -16,6 +16,7 @@ import NotFound from './components/NotFound/NotFound.jsx';
 import Register from './components/Register/Register.jsx';
 import Animation from './components/Animation/Animation.jsx';
 import AuthProvider from './provider/AuthProvider.jsx';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,11 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'checkout',
-        element: <Checkout></Checkout>
+        element: <PrivateRoute><Checkout></Checkout></PrivateRoute>
       },
       {
         path: 'inventory',
-        element: <Inventory></Inventory>
+        element: <PrivateRoute><Inventory></Inventory></PrivateRoute>
       },
       {
         path: 'login',

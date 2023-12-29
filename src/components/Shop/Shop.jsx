@@ -62,29 +62,28 @@ const Shop = () => {
     }
 
     const reviewOrder = () => {
-
         if (!cart.length) {
             toast.error("Cart Empty!");
+            setCartCheck(false) 
             return;
         }
-        setCartCheck(true)
+        setCartCheck(true)       
     }
+
     return (
         <div className="container mx-auto px-8">
-            <div className="grid md:grid-cols-[4fr_1fr]">
+            <div className="md:grid flex flex-col-reverse md:grid-cols-[4fr_1fr]">
                 <div className="grid lg:grid-cols-3 gap-12 my-12">
                     {
-                        products.map(product => <Product addToCart={addToCart} key={product.id} product={product} setCartCheck={setCartCheck}></Product>)
+                        products.map(product => <Product addToCart={addToCart} key={product.id} product={product}></Product>)
                     }
                 </div>
 
                 <div className="bg-[#FF99004D] rounded pt-[8%] py-7 h-screen px-4 md:fixed right-0 top-0">
-                    <Cart removeCart={removeCart} cart={cart}>
-
-                    </Cart>
+                    <Cart removeCart={removeCart} cart={cart}></Cart>
 
                     <Link to={cartCheck ? '/order' : ''}>
-                        <button onClick={reviewOrder} className="w-[232px] h-12 bg-amber-500 rounded text-white text-[17px] font-normal font-['Lato'] tracking-tight flex items-center justify-center gap-3">Review Order <img src={ArrowIcon} alt="" /></button>
+                        <button onMouseEnter={reviewOrder} className="w-[232px] h-12 bg-amber-500 rounded text-white text-[17px] font-normal font-['Lato'] tracking-tight flex items-center justify-center gap-3">Review Order <img src={ArrowIcon} alt="" /></button>
                     </Link>
 
                 </div>

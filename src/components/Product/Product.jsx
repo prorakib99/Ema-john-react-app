@@ -1,11 +1,10 @@
 import CartPlus from '../../images/cart-plus.svg';
-const Product = ({product, addToCart, setCartCheck}) => {
+const Product = ({product, addToCart}) => {
     const { name, img, ratings, price, seller } = product;
     const cartProduct = addToCart;
 
     const handleCart = product => {
         cartProduct(product);
-        setCartCheck(true);
     }
     return (
         <div className="w-full h-[508px]">
