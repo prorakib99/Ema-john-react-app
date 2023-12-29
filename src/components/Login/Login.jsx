@@ -1,11 +1,12 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
-    const { signInUser } = useContext(AuthContext);
+    const { user, signInUser, popUpSignIn } = useContext(AuthContext);
+    
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -42,6 +43,29 @@ const Login = () => {
 
     }
 
+    const googleSignIn = () => {
+
+        const loadingPromise = toast.loading('Pending...');
+        () => loadingPromise;
+        
+        popUpSignIn()
+        .then(result => {
+            const user = result.user;
+            toast.success(<b>User Sign In Success! {user.email}</b>);
+            toast.dismiss(loadingPromise);
+            navigate(from, { replace: true })
+        })
+        .catch(error => {
+            console.log(error);
+            toast.error(<b>Something Wrong Sign In Failed</b>);
+            toast.dismiss(loadingPromise);
+        })
+    }
+
+    if(user){
+       return <Navigate to='/' replace={true}></Navigate>
+    }
+
     return (
         <div className="container mx-auto px-8">
             <div className="flex justify-center items-center my-24">
@@ -73,7 +97,7 @@ const Login = () => {
                         <div className="w-[145px] h-[0px] border border-gray-400"></div>
                     </div>
                     <div>
-                        <button className="w-full h-[55px] rounded-[5px] border hover:bg-slate-200 border-gray-400 text-slate-700 text-[17px] duration-300 font-normal tracking-tight flex justify-center items-center gap-2">
+                        <button onClick={googleSignIn} className="w-full h-[55px] rounded-[5px] border hover:bg-slate-200 border-gray-400 text-slate-700 text-[17px] duration-300 font-normal tracking-tight flex justify-center items-center gap-2">
                             <FcGoogle className="text-3xl" />
                             Continue with Google
                         </button>

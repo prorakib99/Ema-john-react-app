@@ -2,12 +2,14 @@
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
 
-    const { createUser } = useContext(AuthContext)
+    const { user, createUser, popUpSignIn } = useContext(AuthContext)
+
+    const navigate = useNavigate()
 
     const handleRegister = event => {
         event.preventDefault();
@@ -28,13 +30,36 @@ const Register = () => {
         const registerUser = createUser(email, password)
         toast.promise(
             registerUser,
-             {
-               loading: 'Creating...',
-               success: <b>User Register Success!</b>,
-               error: <b>Something Wrong Registration Failed</b>,
-             }
-           );
+            {
+                loading: 'Creating...',
+                success: <b>User Register Success!</b>,
+                error: <b>Something Wrong Registration Failed</b>,
+            }
+        );
 
+    }
+
+    const googleSignIn = () => {
+
+        const loadingPromise = toast.loading('Pending...');
+        () => loadingPromise;
+
+        popUpSignIn()
+            .then(result => {
+                const user = result.user;
+                toast.success(<b>User Sign In Success! {user.email}</b>);
+                toast.dismiss(loadingPromise);
+                navigate('/')
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error(<b>Something Wrong Sign In Failed</b>);
+                toast.dismiss(loadingPromise);
+            })
+    }
+
+    if (user) {
+        return <Navigate to='/' replace={true}></Navigate>
     }
 
     return (
@@ -73,7 +98,7 @@ const Register = () => {
                         <div className="w-[145px] h-[0px] border border-gray-400"></div>
                     </div>
                     <div>
-                        <button className="w-full h-[55px] rounded-[5px] border hover:bg-slate-200 border-gray-400 text-slate-700 text-[17px] duration-300 font-normal tracking-tight flex justify-center items-center gap-2">
+                        <button onClick={googleSignIn} className="w-full h-[55px] rounded-[5px] border hover:bg-slate-200 border-gray-400 text-slate-700 text-[17px] duration-300 font-normal tracking-tight flex justify-center items-center gap-2">
                             <FcGoogle className="text-3xl" />
                             Continue with Google
                         </button>
