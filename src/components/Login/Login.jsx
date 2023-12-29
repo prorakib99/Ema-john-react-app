@@ -1,7 +1,35 @@
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import toast from "react-hot-toast";
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
+    const { signInUser } = useContext(AuthContext)
+
+    const handleLogin = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        if (password.length < 6) {
+            toast.error("Password at least six character");
+            return;
+        }
+
+        const loginUser = signInUser(email, password)
+        toast.promise(
+            loginUser,
+            {
+                loading: 'Pending...',
+                success: <b>User Sign In Success!</b>,
+                error: <b>Something Wrong Sign In Failed</b>,
+            }
+        );
+
+    }
+
     return (
         <div className="container mx-auto px-8">
             <div className="flex justify-center items-center my-24">
@@ -9,7 +37,7 @@ const Login = () => {
 
                     <h4 className="text-slate-700 text-center text-[35px] font-normal tracking-tight">Login</h4>
 
-                    <form className="grid gap-5 mt-7">
+                    <form onSubmit={handleLogin} className="grid gap-5 mt-7">
                         <div>
                             <label htmlFor="email" className="text-slate-700 ml-3 text-[17px] block font-normal tracking-tight">Email</label>
                             <input type="email" name="email" placeholder="Your Email..." className="rounded-[5px] h-[55px] text-lg px-4 mt-2 border w-full border-gray-400" />

@@ -1,7 +1,42 @@
+
+import { useContext } from "react";
+import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
+
+    const { createUser } = useContext(AuthContext)
+
+    const handleRegister = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        const confirm = form.confirm.value;
+
+        if (password.length < 6) {
+            toast.error("Password at least six character");
+            return;
+        }
+        else if (password !== confirm) {
+            toast.error("Confirm Password didn't Match");
+            return;
+        }
+
+        const registerUser = createUser(email, password)
+        toast.promise(
+            registerUser,
+             {
+               loading: 'Creating...',
+               success: <b>User Register Success!</b>,
+               error: <b>Something Wrong Registration Failed</b>,
+             }
+           );
+
+    }
+
     return (
         <div className="container mx-auto px-8">
             <div className="flex justify-center items-center my-24">
@@ -9,7 +44,7 @@ const Register = () => {
 
                     <h4 className="text-slate-700 text-center text-[35px] font-normal tracking-tight">Sign Up</h4>
 
-                    <form className="grid gap-5 mt-7">
+                    <form onSubmit={handleRegister} className="grid gap-5 mt-7">
                         <div>
                             <label htmlFor="email" className="text-slate-700 ml-3 text-[17px] block font-normal tracking-tight">Email</label>
                             <input type="email" name="email" placeholder="Your Email..." className="rounded-[5px] h-[55px] text-lg px-4 mt-2 border w-full border-gray-400" />
