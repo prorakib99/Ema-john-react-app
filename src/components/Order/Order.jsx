@@ -10,7 +10,7 @@ const Order = () => {
     const [updateCart, setUpdateCart] = useState(cartProduct);
 
     const deleteCart = id => {
-        const restCart = updateCart.filter(cart => cart.id !== id)
+        const restCart = updateCart.filter(cart => cart._id !== id)
         removeFromDb(id);
         setUpdateCart(restCart)
     }

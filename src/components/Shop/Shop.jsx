@@ -13,7 +13,7 @@ const Shop = () => {
     const [cartCheck, setCartCheck] = useState(false);
 
     useEffect(() => {
-        fetch('https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json')
+        fetch('http://localhost:5000/services')
             .then(res => res.json())
             .then(data => setProducts(data));
     }, []);
@@ -22,7 +22,7 @@ const Shop = () => {
         const storedCart = getShoppingCart();
         const addProducts = []
         for (const id in storedCart) {
-            const findCartProduct = products.find(product => product.id === id);
+            const findCartProduct = products.find(product => product._id === id);
 
             if (findCartProduct) {
                 const quantity = storedCart[id];
@@ -38,7 +38,7 @@ const Shop = () => {
     const addToCart = product => {
         let newCart = [];
 
-        const exits = cart.find(cartPd => cartPd.id === product.id);
+        const exits = cart.find(cartPd => cartPd._id === product._id);
 
         if (!exits) {
             product.quantity = 1;
@@ -46,14 +46,14 @@ const Shop = () => {
         }
         else {
             product.quantity = exits.quantity + 1;
-            const remaining = cart.filter(cartPd => cartPd.id !== product.id);
+            const remaining = cart.filter(cartPd => cartPd._id !== product._id);
             console.log(remaining);
             newCart = [...remaining, exits];
         }
 
         setCart(newCart)
         addSuccess()
-        addToDb(product.id)
+        addToDb(product._id)
     }
 
     const removeCart = () => {
@@ -75,7 +75,7 @@ const Shop = () => {
             <div className="md:grid flex flex-col-reverse md:grid-cols-[4fr_1fr]">
                 <div className="grid lg:grid-cols-3 gap-12 my-12">
                     {
-                        products.map(product => <Product addToCart={addToCart} key={product.id} product={product}></Product>)
+                        products.map(product => <Product addToCart={addToCart} key={product._id} product={product}></Product>)
                     }
                 </div>
 

@@ -1,7 +1,7 @@
 import Trash from '../../images/trash-alt.svg'
 
 const CartItem = ({cart, deleteCart}) => {
-    const {id, name, price, shipping, img} = cart;
+    const {_id, name, price, shipping, img} = cart;
     const removeCart = deleteCart;
     return (
         <>
@@ -16,7 +16,7 @@ const CartItem = ({cart, deleteCart}) => {
 
                     </div>
                 </div>
-                <button onClick={() => removeCart(id)} className='w-[55px] h-[55px] me-6 bg-rose-500 bg-opacity-30 rounded-full flex items-center justify-center'>
+                <button onClick={() => removeCart(_id)} className='w-[55px] h-[55px] me-6 bg-rose-500 bg-opacity-30 rounded-full flex items-center justify-center'>
                     <img src={Trash} alt="" />
                 </button>
             </div>
