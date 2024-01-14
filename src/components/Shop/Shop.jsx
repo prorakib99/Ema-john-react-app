@@ -32,18 +32,30 @@ const Shop = () => {
 
     useEffect(() => {
         const storedCart = getShoppingCart();
-        const addProducts = [];
-        for (const id in storedCart) {
-            const findCartProduct = products.find((product) => product._id === id);
+        const ids = Object.keys(storedCart);
 
-            if (findCartProduct) {
-                const quantity = storedCart[id];
-                findCartProduct.quantity = quantity;
-                addProducts.push(findCartProduct);
-            }
-        }
-        setCart(addProducts);
-    }, [products]);
+        fetch('http://localhost:5000/productsByIds', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ids)
+        })
+            .then((res) => res.json())
+            .then((cartProducts) => {
+                const addProducts = [];
+                for (const id in storedCart) {
+                    const findCartProduct = cartProducts.find((product) => product._id === id);
+
+                    if (findCartProduct) {
+                        const quantity = storedCart[id];
+                        findCartProduct.quantity = quantity;
+                        addProducts.push(findCartProduct);
+                    }
+                }
+                setCart(addProducts);
+            });
+    }, []);
 
     // Success Toast Add
     const addSuccess = () => toast.success('Added Successful');
@@ -58,7 +70,6 @@ const Shop = () => {
         } else {
             product.quantity = exits.quantity + 1;
             const remaining = cart.filter((cartPd) => cartPd._id !== product._id);
-            console.log(remaining);
             newCart = [...remaining, exits];
         }
 
